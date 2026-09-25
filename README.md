@@ -27,6 +27,25 @@ docker run --rm --shm-size=512m -p 6901:6901 -e IPLANT_USER=$USER harbor.cyverse
 
 Then open <http://localhost:6901>. In VICE, register the tool on port **6901**. Open a terminal from the desktop to reach the agent CLIs.
 
+## DE tool settings
+
+These live in the Discovery Environment, not in this repo, and must match the image. Change them only together with the Dockerfile.
+
+| Setting | Value |
+| --- | --- |
+| DE app | **MESA KASM Ubuntu Desktop** (`0f346e66-b92c-11f1-8dfa-008cfa5ae3e1`) |
+| DE tool | `mesa-kasm` (`ff29a702-b92b-11f1-9483-008cfa5ae3e1`) |
+| Image | `harbor.cyverse.org/vice/mesa-kasm:latest` |
+| Type | interactive |
+| Container port | **6901** |
+| Working directory | `/home/kasm-user/data-store` (the Data Store CSI mount point; must match the Dockerfile `WORKDIR`) |
+| UID | 1000 |
+| Entrypoint override | none (the image's own startup script does the MESA per-user setup) |
+| Max CPU | 32 cores (upstream `vice/kasm/ubuntu:24.04`) |
+| Memory limit | 16 GiB (DE user cap; upstream 128 GiB) |
+
+KasmVNC serves on 6901. `vnc_startup.sh` sources `~/.bashrc` under `set -e`, so any `.bashrc` line that errors aborts startup.
+
 ## Sign in to CyVerse
 
 ```bash
