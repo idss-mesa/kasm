@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=GPU Monitor (nvtop)
+Comment=Live NVIDIA GPU utilisation and memory
+Exec=nvtop
+Terminal=true
+Icon=utilities-system-monitor
+Categories=System;Monitor;

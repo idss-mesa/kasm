@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=GPU Check
+Comment=Verify the NVIDIA GPU: driver, CUDA, PyTorch, Ollama, OpenGL (VirtualGL/EGL) and Vulkan
+Exec=bash -c "mesa-gpu-check; echo; read -rp 'Press Enter to close'"
+Terminal=true
+Icon=video-display
+Categories=System;

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=GLX Spheres (GPU demo)
+Comment=OpenGL demo rendered on the NVIDIA GPU through VirtualGL
+Exec=mesa-gl-run /opt/VirtualGL/bin/glxspheres64
+Terminal=false
+Icon=applications-graphics
+Categories=Graphics;
