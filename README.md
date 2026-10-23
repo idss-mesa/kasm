@@ -34,7 +34,7 @@ These live in the Discovery Environment, not in this repo, and must match the im
 | Setting | Value |
 | --- | --- |
 | DE app | **MESA KASM Ubuntu Desktop** (`01b053c2-b936-11f1-95e9-008cfa5ae3e1`) |
-| DE tool (version `1.0.0`) | `mesa-kasm` (`e380628e-b935-11f1-926e-008cfa5ae3e1`) |
+| DE tool (version `1.1.0`) | `mesa-kasm` (`e380628e-b935-11f1-926e-008cfa5ae3e1`) |
 | Image | `harbor.cyverse.org/vice/mesa-kasm:latest` |
 | Type | interactive (`interactive: true`) |
 | Network mode | `bridge` (Terrain's default `none` gives an analysis that runs but never serves) |
@@ -48,6 +48,8 @@ These live in the Discovery Environment, not in this repo, and must match the im
 | Memory limit | 16 GiB (the DE's cap for tools created or edited through the non-admin tools API; upstream 128 GiB) |
 
 KasmVNC serves on 6901. `vnc_startup.sh` sources `~/.bashrc` under `set -e`, so any `.bashrc` line that errors aborts startup.
+
+An older `mesa-kasm` tool on the same image (`ff29a702-b92b-11f1-9483-008cfa5ae3e1`, version `latest`) is not used by either MESA app.
 
 ## Sign in to CyVerse
 
@@ -190,7 +192,8 @@ The GPU tool is a copy of the CPU tool plus the GPU fields; the DE app is a copy
 
 | Setting | Value |
 | --- | --- |
-| DE tool (version `1.0.0`) | `mesa-kasm-gpu` |
+| DE app | **MESA KASM Ubuntu Desktop (GPU)** (`73ebd8dc-ba88-11f1-9b11-008cfa5ae3e1`, private) |
+| DE tool (version `1.1.0`) | `mesa-kasm-gpu` (`72de2f76-ba88-11f1-94a6-008cfa5ae3e1`) |
 | Image | `harbor.cyverse.org/vice/mesa-kasm:gpu` |
 | GPUs | `min_gpus` = `max_gpus` = **1**. If `min_gpus` is unset, the launch default of 0 gives no GPU. |
 | GPU models | `["NVIDIA-A16"]` (must appear in `GET /terrain/tools/gpu-models`) |
