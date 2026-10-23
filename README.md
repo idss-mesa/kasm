@@ -12,7 +12,7 @@ Built from the `24.04` (published-as-`latest`) variant in [cyverse-vice/kasm-ubu
 | --- | --- |
 | **Desktop** | KasmVNC on port 6901, XFCE session + terminal, Chrome/Firefox, VS Code, and the rest of the Kasm "deluxe" app set from the base |
 | **AI agent CLIs** | Claude Code (`claude`), OpenAI Codex (`codex`), OpenCode (`opencode`), Antigravity (`agy`), Claude Code Router (`ccr`) |
-| **MCP servers** | `irods` (CyVerse Data Store), `mesa` ([mesa-mcp](https://github.com/idss-mesa/mesa-mcp) + [mesa-ducklake](https://github.com/idss-mesa/mesa-ducklake)), `formation` ([formation-mcp](https://github.com/idss-mesa/formation-mcp), CyVerse DE), `filesystem` — pre-registered for every agent CLI |
+| **MCP servers** | `irods` (CyVerse Data Store), `mesa` ([mesa-mcp](https://github.com/idss-mesa/mesa-mcp) + [mesa-ducklake](https://github.com/idss-mesa/mesa-ducklake), pinned to `v0.2.0` on DuckDB 2.0: catalog files it creates cannot be opened by DuckDB 1.x), `formation` ([formation-mcp](https://github.com/idss-mesa/formation-mcp), CyVerse DE), `filesystem` — pre-registered for every agent CLI |
 | **AI Verde** | `aiverde-setup` helper wires OpenCode + Claude Code (via `ccr`) to `https://llm-api.cyverse.ai` |
 | **CyVerse data** | GoCommands (`gocmd`), iRODS config, `s3fs`/OSN mounts (`osn-mount.sh`), AWS CLI |
 | **Dev** | GitHub CLI (`gh`), Git Credential Manager, Go 1.25, Node.js 22 |
@@ -34,7 +34,7 @@ These live in the Discovery Environment, not in this repo, and must match the im
 | Setting | Value |
 | --- | --- |
 | DE app | **MESA KASM Ubuntu Desktop** (`01b053c2-b936-11f1-95e9-008cfa5ae3e1`) |
-| DE tool (version `1.0.0`) | `mesa-kasm` (`e380628e-b935-11f1-926e-008cfa5ae3e1`) |
+| DE tool (version `1.1.0`) | `mesa-kasm` (`e380628e-b935-11f1-926e-008cfa5ae3e1`) |
 | Image | `harbor.cyverse.org/vice/mesa-kasm:latest` |
 | Type | interactive (`interactive: true`) |
 | Network mode | `bridge` (Terrain's default `none` gives an analysis that runs but never serves) |
@@ -48,6 +48,8 @@ These live in the Discovery Environment, not in this repo, and must match the im
 | Memory limit | 16 GiB (the DE's cap for tools created or edited through the non-admin tools API; upstream 128 GiB) |
 
 KasmVNC serves on 6901. `vnc_startup.sh` sources `~/.bashrc` under `set -e`, so any `.bashrc` line that errors aborts startup.
+
+An older `mesa-kasm` tool on the same image (`ff29a702-b92b-11f1-9483-008cfa5ae3e1`, version `latest`) is not used by either MESA app.
 
 ## Sign in to CyVerse
 
@@ -190,7 +192,8 @@ The GPU tool is a copy of the CPU tool plus the GPU fields; the DE app is a copy
 
 | Setting | Value |
 | --- | --- |
-| DE tool (version `1.0.0`) | `mesa-kasm-gpu` |
+| DE app | **MESA KASM Ubuntu Desktop (GPU)** (`73ebd8dc-ba88-11f1-9b11-008cfa5ae3e1`, private) |
+| DE tool (version `1.1.0`) | `mesa-kasm-gpu` (`72de2f76-ba88-11f1-94a6-008cfa5ae3e1`) |
 | Image | `harbor.cyverse.org/vice/mesa-kasm:gpu` |
 | GPUs | `min_gpus` = `max_gpus` = **1**. If `min_gpus` is unset, the launch default of 0 gives no GPU. |
 | GPU models | `["NVIDIA-A16"]` (must appear in `GET /terrain/tools/gpu-models`) |

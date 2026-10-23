@@ -303,6 +303,15 @@ else
 fi
 docker logs "$NOGPU_C" > "$LOGDIR/nogpu-container.log" 2>&1
 
+# ---------------------------------------------------------------- MESA MCP stack
+# MESA MCP stack: /opt/mesa imports mesa-mcp + mesa-ducklake on DuckDB 2.x (catalogs it writes are DuckDB 2-only)
+say "T6 MESA MCP stack"
+if out=$(docker run --rm --entrypoint /opt/mesa/bin/python "$IMAGE" -c "import duckdb, mesa_mcp, mesa_ducklake; from importlib.metadata import version as v; assert duckdb.__version__.startswith('2.'), 'duckdb ' + duckdb.__version__; print('mesa-mcp', v('mesa-mcp'), 'mesa-ducklake', v('mesa-ducklake'), 'duckdb', duckdb.__version__)" 2>&1); then
+    record "T6 mesa-mcp DuckDB 2" PASS "$out"
+else
+    record "T6 mesa-mcp DuckDB 2" FAIL "$(printf '%s' "$out" | tail -1)"
+fi
+
 # ---------------------------------------------------------------- summary
 say "Summary ($IMAGE, GPU $GPUS)"
 printf '%-6s  %-38s  %s\n' RESULT TEST DETAIL
