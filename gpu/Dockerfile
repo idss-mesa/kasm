@@ -81,7 +81,7 @@ RUN curl -fsSL -o /tmp/miniforge.sh \
     printf 'torch==%s+%s\ntorchvision==%s+%s\n' "${TORCH_VERSION}" "$cu" "${TORCHVISION_VERSION}" "$cu" \
         > /opt/conda/envs/pytorch/torch-constraints.txt && \
     printf '[install]\nconstraint = /opt/conda/envs/pytorch/torch-constraints.txt\n' > /opt/conda/envs/pytorch/pip.conf && \
-    /opt/conda/envs/pytorch/bin/pip install --no-cache-dir --extra-index-url "${TORCH_INDEX_URL}" nvitop nvidia-ml-py && \
+    /opt/conda/envs/pytorch/bin/pip install --no-cache-dir --extra-index-url "${TORCH_INDEX_URL}" nvitop nvidia-ml-py "duckdb>=2,<3" && \
     head -1 /opt/conda/envs/pytorch/bin/nvitop | grep -x '#!/opt/conda/envs/pytorch/bin/python[0-9.]*' >/dev/null && \
     ln -s /opt/conda/envs/pytorch/bin/nvitop /usr/local/bin/nvitop && \
     /opt/conda/envs/pytorch/bin/python -c 'import torch, torchvision; print(torch.__version__, torchvision.__version__)' && \
