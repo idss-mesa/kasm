@@ -13,6 +13,7 @@ Built from the `24.04` (published-as-`latest`) variant in [cyverse-vice/kasm-ubu
 | **Desktop** | KasmVNC on port 6901, XFCE session + terminal, Chrome/Firefox, VS Code, and the rest of the Kasm "deluxe" app set from the base |
 | **AI agent CLIs** | Claude Code (`claude`), OpenAI Codex (`codex`), OpenCode (`opencode`), Antigravity (`agy`), Claude Code Router (`ccr`) |
 | **MCP servers** | `irods` (CyVerse Data Store), `mesa` ([mesa-mcp](https://github.com/idss-mesa/mesa-mcp) + [mesa-ducklake](https://github.com/idss-mesa/mesa-ducklake), pinned to `v0.2.0` on DuckDB 2.0: catalog files it creates cannot be opened by DuckDB 1.x), `formation` ([formation-mcp](https://github.com/idss-mesa/formation-mcp), CyVerse DE), `filesystem` — pre-registered for every agent CLI |
+| **DuckDB** | DuckDB 2.0.0 `duckdb` CLI (on `:gpu`, also `import duckdb` in the `pytorch` env). Same major as `mesa`, so it opens the catalogs mesa-ducklake writes |
 | **AI Verde** | `aiverde-setup` helper wires OpenCode + Claude Code (via `ccr`) to `https://llm-api.cyverse.ai` |
 | **CyVerse data** | GoCommands (`gocmd`), iRODS config, `s3fs`/OSN mounts (`osn-mount.sh`), AWS CLI |
 | **Dev** | GitHub CLI (`gh`), Git Credential Manager, Go 1.25, Node.js 22 |
@@ -100,7 +101,7 @@ It validates the key against `/v1/models`, lists your models, and writes `~/.con
 | Category | Tools |
 | --- | --- |
 | **Desktop graphics** | OpenGL on the NVIDIA GPU for the whole XFCE session (Chrome, VS Code, Qt apps, and 3D apps you install such as Blender), VirtualGL 3.1.5 EGL back end (`mesa-gl-run <app>`), Vulkan ICD, `glxinfo` / `vulkaninfo` / `glmark2`; menu entries *GPU Monitor*, *GPU Check*, *GLX Spheres* |
-| **PyTorch** | `torch 2.14.0+cu126`, `torchvision 0.29.0` in the conda env `pytorch` (Miniforge, `/opt/conda`): `conda activate pytorch`. Also numpy, pandas, matplotlib, ipykernel, `nvitop` |
+| **PyTorch** | `torch 2.14.0+cu126`, `torchvision 0.29.0` in the conda env `pytorch` (Miniforge, `/opt/conda`): `conda activate pytorch`. Also numpy, pandas, matplotlib, ipykernel, `nvitop`, `duckdb` 2.x |
 | **Local LLMs** | [Ollama](https://ollama.com) 0.34.4, started with the desktop on `127.0.0.1:11434` (loopback only); `ollama-setup` connects Claude Code, Codex and OpenCode to it |
 | **CUDA** | NVIDIA CUDA 13.4 forward-compat driver (`cuda-compat-13-4`, build arg `CUDA_COMPAT_VERSION`), used only on hosts older than R580 (see below) |
 | **Tools** | `mesa-gpu-check`, `nvtop`, `nvitop` (on `PATH` without `conda activate`), GPU panel on the terminal landing screen |
