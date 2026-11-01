@@ -23,8 +23,8 @@
       "serverUrl": "https://de.cyverse.org/formation/mcp"
     },
     "filesystem": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/home/kasm-user/Desktop", "/home/kasm-user/data-store"]
+      "command": "/home/kasm-user/.npm-global/bin/mcp-server-filesystem",
+      "args": ["/home/kasm-user/Desktop", "/home/kasm-user/data-store"]
     }
   }
 }
