@@ -47,7 +47,7 @@
     },
     "filesystem": {
       "type": "local",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-filesystem", "/home/kasm-user/Desktop", "/home/kasm-user/data-store"],
+      "command": ["/home/kasm-user/.npm-global/bin/mcp-server-filesystem", "/home/kasm-user/Desktop", "/home/kasm-user/data-store"],
       "enabled": true
     }
   }
